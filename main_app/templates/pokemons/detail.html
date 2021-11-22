@@ -89,6 +89,56 @@
         <p class="subsection-content">{{pokemon.name}} has never been fed 😟</p>
       {% endif %}
   </section>
+    <section class="toys">
+    <div class="subsection-title">
+      <h2>Toys</h2>
+      <img src="{% static 'images/Pokeball-PNG-Photo-Image.png' %}" alt="Pokeball" />
+      <img src="{% static 'images/pokemon_PNG154.png' %}" alt="Charmander" />
+      <img src="{% static 'images/117-1172768_pokemon-hd-png-download.png' %}" alt="Pokemons" />
+    </div>
+    <h3>{{ pokemon.name }}'s Toys</h3>
+    <div class="subsection-content">
+      {% if pokemon.toys.count %}
+        {% for toy in pokemon.toys.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ toy.color }}"
+            ></div>
+            <a href="{% url 'toys_detail' toy.id %}">
+              <p>A {{ toy.color }} {{ toy.name }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-toys">{{pokemon.name}} doesn't have any toys 😞</p>
+      {% endif %}
+    </div>
+    <h3>Available Toys</h3>
+    <div class="subsection-content">
+          {% if toys.count %}
+        {% for toy in toys.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ toy.color }}"
+            ></div>
+            <a href="{% url 'toys_detail' toy.id %}">
+              <p>A {{ toy.color }} {{ toy.name }}</p>
+            </a>
+            <form action="{% url 'assoc_toy' pokemon.id toy.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Give toy</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="all-toys">
+          {{pokemon.name}} already has all the available toys 🥳
+        </p>
+      {% endif %}
+    </div>
+  </section>
 </div>
 
 
