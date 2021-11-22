@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pokemon-index.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>Pokemon List</h1>
+  <img src="{% static 'images/1528080677ditto-pokemon-png.png' %}" alt="ditto" />
+  <img src="{% static 'images/jigglypuff-logo-04F3B79EB3-seeklogo.com.png' %}" alt="puff" />
+  <img src="{% static 'images/eevee-logo-D6A54F96A5-seeklogo.com.png' %}" alt="eevee" />
+  <img src="{% static 'images/squirtle-logo-0E4AE193EE-seeklogo.com.png' %}" alt="squirtle" />
+</section>
+
+<section class="card-container">
+  {% for pokemon in pokemons %}
+    <div class="card">
+      <a href="{% url 'pokemons_detail' pokemon.id %}">
+      <div class="card-content">
+        <div class="card-img-container">
+          <img 
+            src="{% static 'images/pika.png' %}" 
+            alt="pikachu"
+          >
+        </div>
+        <h2 class="card-title">{{ pokemon.name }}</h2>
+          <p>{{ pokemon.height }} inches tall and has  {{ pokemon.ability}} ability</p>
+        <p><small>{{ pokemon.description }}</small></p>
+      </div>
+    </a>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
