@@ -25,15 +25,22 @@
         >
       </a>
     </div>
-    <nav>
-      <ul>
-        <li><a href="{% url 'pokemons_index' %}">All Pokemons</a></li>
-         <li><a href="{% url 'toys_index' %}">All Toys</a></li>
-        <li><a href="{% url 'pokemons_create' %}">Add a Pokemon</a></li>
-        <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-      </ul>
-    </nav>
+          <nav>
+        <ul>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'pokemons_index' %}">All Pokemons</a></li>
+            <li><a href="{% url 'toys_index' %}">All Toys</a></li>
+            <li><a href="{% url 'pokemons_create' %}">Add a Pokemon</a></li>
+            <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'logout' %}">Log out</a></li>
+          {% else %}
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'home' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
   </header>
   <main>
     {% block content %}
